@@ -1,6 +1,3 @@
 [submodule "inc/mingw-std-threads"]
 	path = inc/mingw-std-threads
 	url = https://github.com/meganz/mingw-std-threads.git
-[submodule "inc/jack_module"]
-	path = inc/jack_module
-	url = https://github.com/marcdinkum/jack_module.git
