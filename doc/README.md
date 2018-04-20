@@ -1,5 +1,7 @@
 # Hardware Analyser based on Jack
 
+Geert Roks, 2018
+
 ### Concept
 A program that plays a click into a hardware device. The output from the the device is recorded by the the program. The program analyses the outputted signal and plots the results in GNUplot.
 
@@ -7,16 +9,15 @@ A program that plays a click into a hardware device. The output from the the dev
 I want a device to test my products so I know it really does what I told it to do. Further it is very useful to be able to analyze sound. This can be used in more complex audio equipment like pitch correction, harmonizers and spectrum editors.
 
 ### Objectives
-  - Keep a logical and useful log of an project, Document everything
+  - Keep a logical and useful log of an project, document everything
   - Raspberry Pi experience
   - Making a standalone product
-
-
+  - Training with using Branches in Git (?)
 
 
 ### Features
   - [ ] Makefile
-    - [ ] Basic Makefile
+    - [x] Basic Makefile
     - [ ] Recursive Makefiles
   - [ ] Test Signal
     - [ ] Generate click
@@ -37,9 +38,10 @@ I want a device to test my products so I know it really does what I told it to d
   - [ ] Callibration circuit (if needed)
     - [ ] If the wires have impact on the measurement
     - [ ] Direct throughput
-  - [ ] External input
+  - [ ] External input/UI
     - [ ] Potentiometers
     - [ ] Switches
+    - [ ] Indication LEDs
 
 ### Schedule
 ###### week 15
@@ -63,6 +65,7 @@ I want a device to test my products so I know it really does what I told it to d
 
 ###### week 20
   - GNU plot implementation
+  - 3D printed enclosure
 
 ###### week 21
   - Extra week for possible delay caused by problems

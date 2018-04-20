@@ -4,8 +4,9 @@
 
 ### Subjects
 
-##### Make
-
+#### Make
+###### Pattern rules
+https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html
 
 ### Dates
 March 29:
@@ -16,3 +17,14 @@ March 29:
 April 11th:
   - Thought about what I wanted to do for this project and wrote this in the README.md.
   - Created this LOG.md.
+
+April 14th:
+  - Fixed the Makefile. Project compiles now.
+  - Makefile still needs to be recursive.
+
+April 16th:
+  - Pitched my idea in front of class. Got a green light.
+  - Figured some things out about the implicit and pattern rules of Makefiles and the use for them.
+
+April 17th - 20th:
+  - Still struggling with the makefile and the project structure I have. I'm turning the internet upside down in the hopes to find a good example or useful tips.
