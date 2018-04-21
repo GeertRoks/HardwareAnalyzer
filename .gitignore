@@ -1,4 +1,4 @@
-*.exe
+Click #executable file in Linux has no extension. Maybe needs build folder.
 *.o
 
 # Libre Office draw file. The "HardwareAnalyzer.pdf" file is the result of this.

@@ -1,7 +1,7 @@
 CXXFLAGS := -Wall -std=c++11
 CXXFLAGS += $(patsubst %,-I %, $(MODULES))
 LDFLAGS = -L"C:/Program Files (x86)/Jack/lib"
-LDLIBS = -llibjack -lpthread
+LDLIBS = -ljack -lpthread
 
 # -mwindows -I/inc/mingw-std-threads/
 
@@ -22,20 +22,17 @@ include $(patsubst %, %/module.mk,$(MODULES))
 
 # determine the object files
 OBJ := $(patsubst %.cpp,%.o, $(SRC))
-
-OBJDIR = obj
-SRCDIR = src
+JACKOBJ = inc/jack_module/ringbuffer.o inc/jack_module/jack_module.o
 
 all: Click
 
-Click: jack
-	$(CXX) -o $@ $(CXXFLAGS) $(OBJ)
+Click: $(OBJ) jack
+	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(JACKOBJ) $(LDLIBS)
 
 %.cpp.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $<
-	mv $(lastword $(subst /, ,$@)) obj/
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
-jack: inc/jack_module/ringbuffer.o inc/jack_module/jack_module.o
+jack: $(JACKOBJ)
 	cd inc/jack_module && $(MAKE) jack_test
 
 print-%  : ; @echo $* = $($*)

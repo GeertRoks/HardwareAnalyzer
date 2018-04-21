@@ -18,10 +18,12 @@ I want a device to test my products so I know it really does what I told it to d
 ### Features
   - [ ] Makefile
     - [x] Basic Makefile
-    - [ ] Recursive Makefiles
-  - [ ] Test Signal
-    - [ ] Generate click
-    - [ ] Output click with Jack
+    - [x] Recursive Makefiles
+    - [ ] Objects in separate directory, but still good dependencies
+    - [ ] Build folder with the program and the `obj/` folder
+  - [x] Test Signal
+    - [x] Generate click
+    - [x] Output click with Jack
   - [ ] Analyse System
     - [ ] Jack input
     - [ ] Impulse Response
