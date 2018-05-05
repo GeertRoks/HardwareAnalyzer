@@ -9,31 +9,34 @@ A program that plays a click into a hardware device. The output from the the dev
 I want a device to test my products so I know it really does what I told it to do. Further it is very useful to be able to analyze sound. This can be used in more complex audio equipment like pitch correction, harmonizers and spectrum editors.
 
 ### Objectives
-  - Keep a logical and useful log of an project, document everything
+  - Keep a logical and useful log of a project, document everything
   - Raspberry Pi experience
   - Making a standalone product
-  - Training with using Branches in Git (?)
+  - More knowledge of how Makefiles work and can be used
 
 
 ### Features
-  - [ ] Makefile
+  - [x] Makefile
     - [x] Basic Makefile
     - [x] Recursive Makefiles
-    - [ ] Objects in separate directory, but still good dependencies
-    - [ ] Build folder with the program and the `obj/` folder
   - [x] Test Signal
     - [x] Generate click
     - [x] Output click with Jack
-  - [ ] Analyse System
-    - [ ] Jack input
-    - [ ] Impulse Response
+    - [ ] Generate Sweep
+  - [ ] Analysis System
+    - [x] Jack input
+    - [ ] FFt implementation
+    - [ ] Put data in a file readable for GNUplot
   - [ ] GNUplot
-    - [ ] Plot incoming Impulse Response
+    - [ ] Plot impulse response of incoming data
   - [ ] Raspberry Pi
     - [ ] DIY ADC and DAC from [Electrosmash](https://www.electrosmash.com/pedal-pi)
-    - [ ] works fully independent from screen and possibly mains power
+    - [ ] works fully independent of a screen (UI with LEDs)
 
 ######  Extra
+  - [ ] Makefile
+    - [ ] Objects in separate directory, but still good dependencies
+    - [ ] Build folder with the program and the `obj/` folder
   - [ ] Convolver
     - [ ] Export Impulse Responses
     - [ ] Convolve input signal with Impulse Response
@@ -56,14 +59,25 @@ I want a device to test my products so I know it really does what I told it to d
   - Start researching analysis system
 
 ###### week 17
-  - Analasis system working for Impulse Responses
+  - Analysis system for Impulse Responses working
+
+  edit (april 30th):
+  - Research analysis techniques.
 
 ###### week 18
   - Vacation
 
+  edit (april 30th):
+  - Raspberry Pi implementation
+  - DIY ADC and DAC
+
 ###### week 19
   - Raspberry Pi implementation
   - DIY ADC and DAC
+
+  edit (april 30th):
+  - Analysis system for Impulse Responses working
+  - Output Sweep instead of click
 
 ###### week 20
   - GNU plot implementation

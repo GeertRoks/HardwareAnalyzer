@@ -6,7 +6,7 @@ LDLIBS = -ljack -lpthread
 # -mwindows -I/inc/mingw-std-threads/
 
 # Which subdirs do we want to scan for module.mk ?
-MODULES := src src/test_signal
+MODULES := src src/test_signal src/IO
 
 
 # each module will add to this
@@ -29,7 +29,7 @@ all: Click
 Click: $(OBJ) jack
 	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(JACKOBJ) $(LDLIBS)
 
-%.cpp.o: %.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 jack: $(JACKOBJ)
