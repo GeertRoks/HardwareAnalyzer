@@ -6,7 +6,7 @@ LDLIBS = -llibjack -lpthread
 # -mwindows -I/inc/mingw-std-threads/
 
 # Which subdirs do we want to scan for module.mk ?
-MODULES := src src/test_signal
+MODULES := src src/test_signal src/oscillator
 
 
 # each module will add to this
