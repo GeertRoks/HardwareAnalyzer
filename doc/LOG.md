@@ -171,3 +171,9 @@ May 2nd:
 
 May 4th:
   - `TODO: add more info`. Lite didn't work that well. Autologin, SSH. Installed desktop version. Enabled SSH, SPI, I2C, GPIO. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed that much, because I never had working code. Committed work, so It could be pulled.
+
+May 6th:
+  - `TODO: add more info`Got audio working with help of this [video](https://www.youtube.com/watch?v=3pXB90IDNoY). Output circuit is different from the video. I've used the circuit of [Electrosmash](https://www.electrosmash.com/images/tech/pedal-pi/pedal_pi_block_diagram.jpg). Created branches, but not sure if I did it right or in a useful way. [Play sound from usb](https://devtidbits.com/2013/03/21/using-usb-external-hard-disk-flash-drives-with-to-your-raspberry-pi/).
+
+May 7th:
+  - Presentation in Class. Asked help for branches.
