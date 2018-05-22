@@ -6,11 +6,8 @@ LDLIBS = -ljack -lpthread
 # -mwindows -I/inc/mingw-std-threads/
 
 # Which subdirs do we want to scan for module.mk ?
-<<<<<<< HEAD
-MODULES := src src/test_signal src/IO
-=======
 MODULES := src src/test_signal src/oscillator
->>>>>>> 9bad05753d70de17bb42f5b09e49a32eec309807
+
 
 
 # each module will add to this
