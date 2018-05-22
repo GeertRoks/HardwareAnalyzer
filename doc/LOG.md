@@ -177,3 +177,17 @@ May 6th:
 
 May 7th:
   - Presentation in Class. Asked help for branches.
+
+May 14th:
+  - Had nothing to present in class, because I had no progress. Last week was very hectic and there was no time to work on this project.
+  - I created the `develop` branch.
+
+May 17th:
+  - Initialized the sweep files: sweep.h, sinewave.h and phasor.h. The phasor is going to increase the Pitch of the sinewave in the sweep file.
+
+May 18th:
+  - Build the ADC for the Raspberry Pi.
+  - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage. I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
+
+May 22nd:
+  - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal. 
