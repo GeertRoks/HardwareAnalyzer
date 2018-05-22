@@ -1,16 +1,11 @@
 CXXFLAGS := -Wall -std=c++11
 CXXFLAGS += $(patsubst %,-I %, $(MODULES))
-LDFLAGS = -L"C:/Program Files (x86)/Jack/lib"
-LDLIBS = -ljack -lpthread
+LDFLAGS = -l bcm2835
+LDLIBS = -lpthread
 
-# -mwindows -I/inc/mingw-std-threads/
 
 # Which subdirs do we want to scan for module.mk ?
-<<<<<<< HEAD
-MODULES := src src/test_signal src/IO
-=======
 MODULES := src src/test_signal src/oscillator
->>>>>>> 9bad05753d70de17bb42f5b09e49a32eec309807
 
 
 # each module will add to this
@@ -22,30 +17,28 @@ INCS :=
 
 # include the description for each module
 #
-include $(patsubst %, %/module.mk,$(MODULES))
+include $(patsubst %, %/module.mk, $(MODULES))
 
 # determine the object files
 OBJ := $(patsubst %.cpp,%.o, $(SRC))
-JACKOBJ = inc/jack_module/ringbuffer.o inc/jack_module/jack_module.o
 
 all: Click
 
-Click: $(OBJ) jack
+Click: $(OBJ)
 	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(JACKOBJ) $(LDLIBS)
 
-%.o: %.cpp
+%.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
-jack: $(JACKOBJ)
-	cd inc/jack_module && $(MAKE) jack_test
-
+# Print Makefile variable function (Makefile debugger)
+# 		Type in the commandline: print-<variablename> and it will display whatever <variablename> is.
 print-%  : ; @echo $* = $($*)
 
 clean:
 	rm obj/*.o
 	rm Click.exe
 
-.PHONY: all clean jack
+.PHONY: all clean
 
 
 # CXX is default g++ so doesn't need to be defined
