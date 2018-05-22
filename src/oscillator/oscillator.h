@@ -15,7 +15,7 @@ public:
 
   virtual float getSample() = 0;
   void tick();
-  void setFreq(float freq, int sampleRate);
+  void setFreq(float freq);
 
 protected:
   double phase = 0;
@@ -26,7 +26,7 @@ protected:
 
 private:
   float freq;
-  int sampleRate;
+  int sampleRate = 48000;
 
 };//class
 

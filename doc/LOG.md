@@ -170,10 +170,11 @@ May 2nd:
   - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO:add info about how to install Raspbian.`
 
 May 4th:
-  - `TODO: add more info`. Lite didn't work that well. Autologin, SSH. Installed desktop version. Enabled SSH, SPI, I2C, GPIO. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed that much, because I never had working code. Committed work, so It could be pulled.
+  - Raspbian Lite didn't work verry well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, wich is just a few minutes of work. 
+  - I enabled SSH, SPI, I2C and GPIO functionality. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed much, because I never had working code. So I committed my current nonworking code, so it could be pulled to my Raspbery.
 
 May 6th:
-  - `TODO: add more info`Got audio working with help of this [video](https://www.youtube.com/watch?v=3pXB90IDNoY). Output circuit is different from the video. I've used the circuit of [Electrosmash](https://www.electrosmash.com/images/tech/pedal-pi/pedal_pi_block_diagram.jpg). Created branches, but not sure if I did it right or in a useful way. [Play sound from usb](https://devtidbits.com/2013/03/21/using-usb-external-hard-disk-flash-drives-with-to-your-raspberry-pi/).
+  - Got audio working with help of this [video](https://www.youtube.com/watch?v=3pXB90IDNoY). Output circuit is different from the video. I've used the circuit of [Electrosmash](https://www.electrosmash.com/images/tech/pedal-pi/pedal_pi_block_diagram.jpg). Created branches, but not sure if I did it right or in a useful way. [Play sound from usb](https://devtidbits.com/2013/03/21/using-usb-external-hard-disk-flash-drives-with-to-your-raspberry-pi/).
 
 May 7th:
   - Presentation in Class. Asked help for branches.
@@ -190,4 +191,8 @@ May 18th:
   - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage. I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
 
 May 22nd:
-  - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal. 
+  - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal.
+  - Installed [KiCAD](http://kicad-pcb.org/). It's a free electronics circuit design program. If there is time I will design a pcb with it as hat for my Raspberry Pi. At {JLCPCB](https://jlcpcb.com/) you can order 10 of these for only $2,-.
+
+ - I lost the overview of my project, because I missed a lot of milestones on my schedule. Also, I have features that work a different way then I intended at first. So I went back to the drawing board. First redrawing my Sweep signal system.
+ - Sweep implementation done!. I still need to test it aurally, but the sample points seem right.

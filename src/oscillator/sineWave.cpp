@@ -1,8 +1,7 @@
 
 #include "sineWave.h"
 
-SineWave::SineWave(float freq) : Oscillator() {
-  this->freq = freq;
+SineWave::SineWave() : Oscillator() {
 }//SineWave()
 
 SineWave::~SineWave() {

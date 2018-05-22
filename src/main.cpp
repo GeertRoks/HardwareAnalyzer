@@ -1,13 +1,19 @@
 
 #include <iostream>
 
-#include "../inc/jack_module/jack_module.h"
-
 #include "IO/io.h"
+#include "oscillator/phasor.h"
+#include "oscillator/sweep.h"
 
 
 int main(int argc, char const *argv[]) {
 
+Sweep sweep(15);
+
+while(1) {
+  std::cout << sweep.process() << '\n';
+  sweep.tick();
+}//while
 
 // May be needed with the bcm2835 library.
   // std::thread analysisThread(&IO::analysis, &io);

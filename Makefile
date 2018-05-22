@@ -7,10 +7,7 @@ LDLIBS = -lpthread
 # Which subdirs do we want to scan for module.mk ?
 MODULES := src src/test_signal src/oscillator
 
-
-
 # each module will add to this
-# We'll start with the module in this dir which contains main()
 SRC :=
 
 # each module will add the headers that matter to the global project
@@ -26,7 +23,11 @@ OBJ := $(patsubst %.cpp,%.o, $(SRC))
 all: Click
 
 Click: $(OBJ)
-	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(JACKOBJ) $(LDLIBS)
+	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(LDLIBS)
+
+#test for sweep
+Sweep: $(OBJ)
+	$(CXX) -o $@ $(CXXFLAGS) src/oscillator/*.o src/main.o $(LDLIBS)
 
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
