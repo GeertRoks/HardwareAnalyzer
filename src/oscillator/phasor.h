@@ -19,3 +19,10 @@ private:
 };//class
 
 #endif//PHASOR_H_
+
+//NOTE:
+/*
+TODO:
+  - Make phasor one shot.
+  - input: sweeptime.
+*/

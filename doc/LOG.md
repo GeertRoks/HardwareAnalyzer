@@ -170,7 +170,7 @@ May 2nd:
   - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO:add info about how to install Raspbian.`
 
 May 4th:
-  - Raspbian Lite didn't work verry well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, wich is just a few minutes of work. 
+  - Raspbian Lite didn't work verry well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, wich is just a few minutes of work.
   - I enabled SSH, SPI, I2C and GPIO functionality. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed much, because I never had working code. So I committed my current nonworking code, so it could be pulled to my Raspbery.
 
 May 6th:
@@ -196,3 +196,14 @@ May 22nd:
 
  - I lost the overview of my project, because I missed a lot of milestones on my schedule. Also, I have features that work a different way then I intended at first. So I went back to the drawing board. First redrawing my Sweep signal system.
  - Sweep implementation done!. I still need to test it aurally, but the sample points seem right.
+
+May 23rd:
+  - I bought 3 MCP4725 DAC boards and a cheap digital oscilloscope (DSO 138) which can analyze signals up to 200 MHz while my analog one only is accurate until 20 MHz. For example the PWM signal of the Pi is too fast for my analog oscilloscope.
+  I bought this from [opencircuit.nl](https://opencircuit.nl/). I'm very happy with their shop.
+
+May 25th:
+  - Got the package in the mail and directly assembled the oscilloscope, because it's a build it yourself kit.
+  - The oscilloscope works wonderful for the price. It has some notable noise, but that doesn't weigh up to all the things you can do with it for only €30,-.
+
+May 27th:
+  - Watched this useful [video](https://www.youtube.com/watch?v=PJG79_Yg5Sw). The man in the video explains the MCP4725 and implementation for Raspberry Pi very clearly.
