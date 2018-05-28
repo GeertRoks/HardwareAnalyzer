@@ -167,7 +167,7 @@ May 1st:
   - I tried installing the BCM2835 library on my Linux machine for development, but I get a weird error. So I will see what will be the easiest way to develop. Either writing in Atom on the Linux machine and committing to git and pulling onto the Raspberry Pi, or writing in either Nano or Vim on the Raspberry Pi itself. When using the second option I will have to start using branches to keep updating the LOG and working on the project.
 
 May 2nd:
-  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO:add info about how to install Raspbian.`
+  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO: add info about how to install Raspbian.`
 
 May 4th:
   - Raspbian Lite didn't work verry well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, wich is just a few minutes of work.
@@ -188,7 +188,7 @@ May 17th:
 
 May 18th:
   - Build the ADC for the Raspberry Pi.
-  - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage. I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
+  - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage.`TODO: Add info about how I measured the output` I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
 
 May 22nd:
   - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal.
@@ -207,3 +207,14 @@ May 25th:
 
 May 27th:
   - Watched this useful [video](https://www.youtube.com/watch?v=PJG79_Yg5Sw). The man in the video explains the MCP4725 and implementation for Raspberry Pi very clearly.
+  - I tried it and couldn't get it to work and his video doesn't give any help. I keep getting his `Write to register 1` error. In his video he isn't really clear about what this error does.
+  - So I tried using the wiringPi library, because I heard a lot about this. I tried getting it to work with help of [this site](https://engineer.john-whittington.co.uk/2015/03/raspberry-pi-dac-mcp4725-with-wiringpi/). Nonetheless I also didn't get this to work, because I kept getting this error:
+  ~~~
+  TODO: Add error.
+  ~~~
+  - After 3 hours of struggling I came to the conclusion that a DIY ADC and DAC is not as simple as I thought it would be and that I needed to pick up my original project. So I decided to use an USB audio interface instead. I think that that is easier to implement and I can use Jack again instead of complicated bit math. I will research this tomorrow.
+
+May 28th:
+  - Presented progress in class
+  - Discussed my idea about and problems with my DIY ADC and DAC.
+  - Discussed my idea about what my deliverable will be and my teachers said that a easily readable report of my research and progress would be a very useful exercise for me.
