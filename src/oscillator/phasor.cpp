@@ -1,7 +1,7 @@
 
 #include "phasor.h"
 
-Phasor::Phasor() {
+Phasor::Phasor() : Oscillator(0.0625) {
 }//Phasor()
 
 Phasor::Phasor(float min, float max) : Oscillator(0.0625) {

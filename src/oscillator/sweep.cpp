@@ -3,7 +3,7 @@
 
 Sweep::Sweep(int sweepTime) {
   this->sweepTime = sweepTime;
-
+  ramp.setMinMax(20, 20000);
 }//Sweep
 
 Sweep::~Sweep() {
