@@ -1,16 +1,13 @@
 CXXFLAGS := -Wall -std=c++11
 CXXFLAGS += $(patsubst %,-I %, $(MODULES))
-LDFLAGS = -l bcm2835
-LDLIBS = -lpthread
+LDFLAGS = -I/usr/local/include
+LDLIBS = -lpthread -ljack
 
 
 # Which subdirs do we want to scan for module.mk ?
-MODULES := src src/test_signal src/oscillator
-
-
+MODULES := src src/test_signal src/oscillator inc
 
 # each module will add to this
-# We'll start with the module in this dir which contains main()
 SRC :=
 
 # each module will add the headers that matter to the global project
@@ -26,7 +23,11 @@ OBJ := $(patsubst %.cpp,%.o, $(SRC))
 all: Click
 
 Click: $(OBJ)
-	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(JACKOBJ) $(LDLIBS)
+	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS)
+
+#test for sweep
+Sweep: $(OBJ)
+	$(CXX) -o $@ $(CXXFLAGS) src/oscillator/*.o src/main.o $(LDLIBS)
 
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -36,8 +37,8 @@ Click: $(OBJ)
 print-%  : ; @echo $* = $($*)
 
 clean:
-	rm obj/*.o
-	rm Click.exe
+	rm $(OBJ)
+	rm Click
 
 .PHONY: all clean
 

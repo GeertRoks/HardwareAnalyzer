@@ -22,7 +22,7 @@ I want a device to test my products so I know it really does what I told it to d
     - [x] Basic Makefile
     - [x] Recursive Makefiles
   - [x] Test Signal
-    - [x] Generate click
+    - [x] Generate click (obsolete)
     - [x] Output click with Jack (obsolete)
     - [x] Output signal with GPIO pins (edit: May 7th)
     - [ ] Generate Sweep
@@ -90,11 +90,20 @@ I want a device to test my products so I know it really does what I told it to d
 ###### week 21
   - Extra week for possible delay caused by problems
 
+  edit (May 22nd):
+  - Sweep output working
+  - start Analysis system
 ###### week 22
   - External Input
 
+  edit (May 22nd):
+  - Finish analysis system
+  - GNUplot implementation
 ###### week 23
   - Convolution
 
+  edit (May 22nd):
+  - debug and add comments to code
+  - Prepare for final presentation
 ###### week 24
   - Final presentation

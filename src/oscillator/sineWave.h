@@ -3,16 +3,14 @@
 
 #include "oscillator.h"
 
-class Sinewave : public Oscillator {
+class SineWave : public Oscillator {
 public:
-  Sinewave(float offset, float depth);
-  ~Sinewave();
+  SineWave();
+  ~SineWave();
 
   float getSample() override;
 
 private:
-  float offset;
-  float depth;
 };//class
 
 #endif//SINEWAVE_H_

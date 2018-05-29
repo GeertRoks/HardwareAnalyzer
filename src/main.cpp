@@ -1,34 +1,36 @@
 
 #include <iostream>
 
+#include "IO/io.h"
+#include "oscillator/sineWave.h"
+#include "oscillator/sweep.h"
 #include "../inc/jack_module/jack_module.h"
 
-#include "IO/io.h"
-
+unsigned long chunksize=2048;
+JackModule jack;
+unsigned long samplerate=44100; // default
 
 int main(int argc, char const *argv[]) {
 
+  jack.init(argv[0]); // use program name as JACK client name
+  jack.autoConnect();
 
-// May be needed with the bcm2835 library.
-  // std::thread analysisThread(&IO::analysis, &io);
-  // std::thread testSignalThread(&IO::testSignal, &io);
-  //
-  // while(true) {
-  //   char input;
-  //   std::cin >> input;
-  //   switch (input) {
-  //     case 'f':
-  //       io.setFire(true);
-  //       break;
-  //     default:
-  //       io.setFire(false);
-  //       break;
-  //   }//switch
-  // }//while
-  //
-  // testSignalThread.join();
-  // analysisThread.join();
+  samplerate=jack.getSamplerate();
+  std::cerr << "Samplerate: " << samplerate << std::endl;
 
+  Sweep sweep(15);
+
+  float *outbuffer = new float[chunksize];
+
+  while(true) {
+    for(unsigned int x = 0; x < chunksize; x++) {
+      outbuffer[x] = sweep.process();
+      sweep.tick();
+    }//for
+    jack.writeSamples(outbuffer, chunksize);
+  }//while
+
+  jack.end();
 
   return 0;
 }//main

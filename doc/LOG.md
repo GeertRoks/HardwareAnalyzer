@@ -16,7 +16,7 @@
 https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html
 
 
-#### Installing programs on LINUX
+#### Installing programs on Linux
 
 ###### JACK
 - Download [Jack 2](http://jackaudio.org/downloads/). My version is `1.9.12`
@@ -167,13 +167,66 @@ May 1st:
   - I tried installing the BCM2835 library on my Linux machine for development, but I get a weird error. So I will see what will be the easiest way to develop. Either writing in Atom on the Linux machine and committing to git and pulling onto the Raspberry Pi, or writing in either Nano or Vim on the Raspberry Pi itself. When using the second option I will have to start using branches to keep updating the LOG and working on the project.
 
 May 2nd:
-  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO:add info about how to install Raspbian.`
+  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO: add info about how to install Raspbian.`
 
 May 4th:
-  - `TODO: add more info`. Lite didn't work that well. Autologin, SSH. Installed desktop version. Enabled SSH, SPI, I2C, GPIO. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed that much, because I never had working code. Committed work, so It could be pulled.
+  - Raspbian Lite didn't work very well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, which is just a few minutes of work.
+  - I enabled SSH, SPI, I2C and GPIO functionality. Installed bcm2835 library. Rewritten blink sketch. Git cloned HardwareAnalyzer on Pi. Realized that I hadn't committed much, because I never had working code. So I committed my current nonworking code, so it could be pulled to my Raspberry.
 
 May 6th:
-  - `TODO: add more info`Got audio working with help of this [video](https://www.youtube.com/watch?v=3pXB90IDNoY). Output circuit is different from the video. I've used the circuit of [Electrosmash](https://www.electrosmash.com/images/tech/pedal-pi/pedal_pi_block_diagram.jpg). Created branches, but not sure if I did it right or in a useful way. [Play sound from usb](https://devtidbits.com/2013/03/21/using-usb-external-hard-disk-flash-drives-with-to-your-raspberry-pi/).
+  - Got audio working with help of this [video](https://www.youtube.com/watch?v=3pXB90IDNoY). Output circuit is different from the video. I've used the circuit of [Electrosmash](https://www.electrosmash.com/images/tech/pedal-pi/pedal_pi_block_diagram.jpg). Created branches, but not sure if I did it right or in a useful way. [Play sound from usb](https://devtidbits.com/2013/03/21/using-usb-external-hard-disk-flash-drives-with-to-your-raspberry-pi/).
 
 May 7th:
   - Presentation in Class. Asked help for branches.
+
+May 14th:
+  - Had nothing to present in class, because I had no progress. Last week was very hectic and there was no time to work on this project.
+  - I created the `develop` branch.
+
+May 17th:
+  - Initialized the sweep files: sweep.h, sinewave.h and phasor.h. The phasor is going to increase the Pitch of the sinewave in the sweep file.
+
+May 18th:
+  - Build the ADC for the Raspberry Pi.
+  - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage.`TODO: Add info about how I measured the output` I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
+
+May 22nd:
+  - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal.
+  - Installed [KiCAD](http://kicad-pcb.org/). It's a free electronics circuit design program. If there is time I will design a pcb with it as hat for my Raspberry Pi. At {JLCPCB](https://jlcpcb.com/) you can order 10 of these for only $2,-.
+
+ - I lost the overview of my project, because I missed a lot of milestones on my schedule. Also, I have features that work a different way then I intended at first. So I went back to the drawing board. First redrawing my Sweep signal system.
+ - Sweep implementation done!. I still need to test it aurally, but the sample points seem right.
+
+May 23rd:
+  - I bought 3 MCP4725 DAC boards and a cheap digital oscilloscope (DSO 138) which can analyze signals up to 200 MHz while my analog one only is accurate until 20 MHz. For example the PWM signal of the Pi is too fast for my analog oscilloscope.
+  I bought this from [opencircuit.nl](https://opencircuit.nl/). I'm very happy with their shop.
+
+May 25th:
+  - Got the package in the mail and directly assembled the oscilloscope, because it's a build it yourself kit.
+  - The oscilloscope works wonderful for the price. It has some notable noise, but that doesn't weigh up to all the things you can do with it for only €30,-.
+
+May 27th:
+  - Watched this useful [video](https://www.youtube.com/watch?v=PJG79_Yg5Sw). The man in the video explains the MCP4725 and implementation for Raspberry Pi very clearly.
+  - I tried it and couldn't get it to work and his video doesn't give any help. I keep getting his `Write to register 1` error. In his video he isn't really clear about what this error does.
+  - So I tried using the wiringPi library, because I heard a lot about this. I tried getting it to work with help of [this site](https://engineer.john-whittington.co.uk/2015/03/raspberry-pi-dac-mcp4725-with-wiringpi/). Nonetheless I also didn't get this to work, because I kept getting this error:
+  ~~~
+  TODO: Add error.
+  ~~~
+  - After 3 hours of struggling I came to the conclusion that a DIY ADC and DAC is not as simple as I thought it would be and that I needed to pick up my original project. So I decided to use an USB audio interface instead. I think that that is easier to implement and I can use Jack again instead of complicated bit math. I will research this tomorrow.
+
+May 28th:
+  - Presented progress in class
+  - Discussed my idea about and problems with my DIY ADC and DAC.
+  - Discussed my idea about what my deliverable will be and my teachers said that a easily readable report of my research and progress would be a very useful exercise for me. So I will make a report of the research I did about Makefiles, Raspberry Pi and hardware AD/DA converter.
+  - In the practicum after class I tried attaching an audio interface to my Raspberry Pi. This also didn't really work and got me a little frustrated.
+  - Pieter Suurmond, my DSP teacher, asked me about my progress on my project. He came with the solution to skip the Raspberry Pi for now and just work on an other Linux computer. I completely agreed with him, because that way I can continue on my code and it will still be compatible with a Raspberry Pi if I still want that in the future.
+
+May 29th:
+  - With the feedback from yesterday and tip from Pieter Suurmond in mind, I set a goal for today: get the sweep working with JACK on my Linux computer.
+  - My first problem was to get Jack working on my Linux computer. I installed it, but always gave me a D-Bus error and that was the moment when I started to develop on the BCM2835 library. I solved this with help of [this site](http://rivendell.tryphon.org/wiki/Debian_6_Installing_JACK2) (See <tag to overview>). `TODO add to overview` JACK and QJackctl worked correctly after that.
+  - Then I added jack_module as a submodule again. This gave me some problems, because I didn't fully remove these from the last time. So I had some path problems that I didn't know to fix. So I had no local changes and decided to remove my local project folder and `git clone` it back. That way all modules were gone, because I had removed them on my other computer, but locally it was still stored on my Linux computer. After that I just `git submodule add` the jack_module library from [Marc's github](https://github.com/marcdinkum/) and everything was allright.
+  - I didn't want to edit Marc's project folder, because if Marc was to update his library, I would have to re-edit that. Before I called his Makefile recursivly from my Makefile, but that way it compiles also all his examples that I don't want. So I created a module.mk file in the `inc/` folder and added only the jack_module.cpp/.h and ringbuffer.cpp/.h to my Makefile. This works very well.
+  - I edited my main.cpp so Jack worked in it. Only leaving the threads out for now. I later want it all in my IO file. I forgot to add the jack.init() and jack.autoConnect() and wondered why I couldn't hear anything and couldn't see my program in the connect list of QJackctl. So be sure to include everything.
+  - I debugged some problems in sweep.h that I finally could check.
+  - Sweep is still very hardwired and I want it more variable, but that comes later. Also I want the sweep to be logarithmically so the lower frequencies get more attention.
+  - For now I want to combine all branches because I made a bit of a mess. Now I know how they work so I think that when I merge my dell branch to the master and remove the rest of the branches I will make better branches this time.

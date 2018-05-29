@@ -5,20 +5,19 @@ Oscillator::Oscillator() {
 }//Oscillator()
 
 Oscillator::Oscillator(float freq) {
-  setFreq(freq, this->sampleRate);
+  setFreq(freq);
 }//Oscillator(float)
 
 Oscillator::~Oscillator() {
 }//~Oscillator()
 
 
-void Oscillator::setFreq(float freq, int sampleRate) {
+void Oscillator::setFreq(float freq) {
 /**
   Function: Change the frequency of the oscillator.
   Refrence: http://basicsynth.com/index.php?page=basic
 */
   this->freq = freq;
-  this->sampleRate = sampleRate;
 
   phaseStep = (twoPi / this->sampleRate) * this->freq;
 }//setFreq()
