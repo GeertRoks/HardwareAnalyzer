@@ -16,6 +16,7 @@ public:
 private:
   float offset = 20;
   float depth = 19080;
+  double growth = 3;
 };//class
 
 #endif//PHASOR_H_
