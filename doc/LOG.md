@@ -224,9 +224,29 @@ May 28th:
 May 29th:
   - With the feedback from yesterday and tip from Pieter Suurmond in mind, I set a goal for today: get the sweep working with JACK on my Linux computer.
   - My first problem was to get Jack working on my Linux computer. I installed it, but always gave me a D-Bus error and that was the moment when I started to develop on the BCM2835 library. I solved this with help of [this site](http://rivendell.tryphon.org/wiki/Debian_6_Installing_JACK2) (See <tag to overview>). `TODO add to overview` JACK and QJackctl worked correctly after that.
-  - Then I added jack_module as a submodule again. This gave me some problems, because I didn't fully remove these from the last time. So I had some path problems that I didn't know to fix. So I had no local changes and decided to remove my local project folder and `git clone` it back. That way all modules were gone, because I had removed them on my other computer, but locally it was still stored on my Linux computer. After that I just `git submodule add` the jack_module library from [Marc's github](https://github.com/marcdinkum/) and everything was allright.
+  - Then I added jack_module as a submodule again. This gave me some problems, because I didn't fully remove these from the last time. This gave me some path problems that I didn't know to fix. Because I had no local changes, I decided to remove my local project folder and `git clone` it back. That way all modules were gone, because I had removed them on my other computer, but locally it was still stored on my Linux computer. After that I just `git submodule add` the jack_module library from [Marc's github](https://github.com/marcdinkum/) and everything was allright.
   - I didn't want to edit Marc's project folder, because if Marc was to update his library, I would have to re-edit that. Before I called his Makefile recursivly from my Makefile, but that way it compiles also all his examples that I don't want. So I created a module.mk file in the `inc/` folder and added only the jack_module.cpp/.h and ringbuffer.cpp/.h to my Makefile. This works very well.
   - I edited my main.cpp so Jack worked in it. Only leaving the threads out for now. I later want it all in my IO file. I forgot to add the jack.init() and jack.autoConnect() and wondered why I couldn't hear anything and couldn't see my program in the connect list of QJackctl. So be sure to include everything.
   - I debugged some problems in sweep.h that I finally could check.
   - Sweep is still very hardwired and I want it more variable, but that comes later. Also I want the sweep to be logarithmically so the lower frequencies get more attention.
   - For now I want to combine all branches because I made a bit of a mess. Now I know how they work so I think that when I merge my dell branch to the master and remove the rest of the branches I will make better branches this time.
+
+May 30th:
+  - Merged the dell branch to master and deleted all branches.
+  - Then I created a new develop branch.
+  - Something went wrong on my Linux computer with the merging and deleting of branches and it told me I had 18 new commits to be pushed while the remote was allready up to date. So I didn't take the risk and deleted the full project folder and `git clone` it back. All commit problems were solved with this.
+  - I noticed that I had no files in the jack_module folder and the program wouldn't compile anymore because of this. I searched how to get the submodule back and read that you have to add it again on [this thread of stackoverflow](https://stackoverflow.com/questions/10054011/git-submodule-not-pulling-files-in-submodules). It says that every time you clone a repository with submodules you have to type this:
+  ~~~
+  git submodule init
+  git submodule update
+  ~~~
+  This downloads the files back to your computer. If the submodule owner updates his repository, you can pull the changes with `git submodule update`.
+
+May 31st:
+  - Tried creating a function that would make the sweep logarithmically.
+  - I started with the idea that the input would be between 0 and 2Pi and the output would be between 20 Hz and 20 KHz. I started with the basic logarithmic formula: `F(x) = a * g^x`. Where a is the output at zero and g is the growth factor.
+  - When I solved it for the values I wanted and tested it in sweep.h, I thought about making it variable. This was very easy, because a is just the lowest value to be tested. For g you need to solve for `g = log(maxvalue/a) / log(2Pi)`. This is extracted out of the basic formula with F(x) = maxvalue and x = 2Pi.
+
+June 3rd:
+  - Checked if the logarithmic sweep is really logarithmic and looked how the linear sweep looks like. They resemble my expectations.
+  - From this point I will make a report on my research on the different subjects I came across for my final grade. After that I will finish this project, since it will still be a useful device to have.
