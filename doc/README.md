@@ -23,12 +23,13 @@ I want a device to test my products so I know it really does what I told it to d
     - [x] Recursive Makefiles
   - [x] Test Signal
     - [x] Generate click (obsolete)
-    - [x] Output click with Jack (obsolete)
-    - [x] Output signal with GPIO pins (edit: May 7th)
-    - [ ] Generate Sweep
+    - [x] Output click with Jack
+    - [x] Output signal with GPIO pins (edit: May 7th) (obsolete)
+    - [x] Generate logarithmic Sweep
+
   - [ ] Analysis System
-    - [x] Jack input (obsolete)
-    - [ ] Receive input with GPIO pins (edit: May 7th)
+    - [x] Jack input
+    - [ ] Receive input with GPIO pins (edit: May 7th) (obsolete)
     - [ ] FFt implementation
     - [ ] Put data in a file readable for GNUplot
   - [ ] GNUplot
