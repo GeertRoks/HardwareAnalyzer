@@ -1,20 +1,44 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#  File Name   :   Makefile
+#  System Name :   HardwareAnalyzer
+#  Version     :   0.1 (not-released)
+#  Author      :   Geert Roks
+#  GitHub      :   github.com/GeertRoks/HardwareAnalyzer.git
+#
+#  Function    :   Build system for the program HardwareAnalyzer. It collects
+# 	given module.mk files and reads them. From these it creates a list
+#	of all relevant source and header files.
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#  For a description of the program and the License see the main.cpp file
+#  at src/main.cpp of this project folder. THIS FILE ALSO FALLS UNDER THE
+#  LICENSE DESCRIBED IN THE main.cpp FILE.
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#  Special thanks to Marc Goenewegen for showing me the module.mk system.
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
 CXXFLAGS := -Wall -std=c++11
 CXXFLAGS += $(patsubst %,-I %, $(MODULES))
 LDFLAGS = -I/usr/local/include
 LDLIBS = -lpthread -ljack
 
 
-# Which subdirs do we want to scan for module.mk ?
+# the folders where it searches for module.mk files
 MODULES := src src/test_signal src/oscillator inc
 
-# each module will add to this
+# each module will add the source files to this
 SRC :=
 
-# each module will add the headers that matter to the global project
-INCS :=
+# each module will add the headers to this
+HDRS :=
 
-# include the description for each module
-#
+# include the source and header files for each module
 include $(patsubst %, %/module.mk, $(MODULES))
 
 # determine the object files
@@ -25,15 +49,13 @@ all: Click
 Click: $(OBJ)
 	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS)
 
-#test for sweep
-Sweep: $(OBJ)
-	$(CXX) -o $@ $(CXXFLAGS) src/oscillator/*.o src/main.o $(LDLIBS)
-
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
+
 # Print Makefile variable function (Makefile debugger)
-# 		Type in the commandline: print-<variablename> and it will display whatever <variablename> is.
+# 	Type in the commandline: print-<variablename>
+#	and it will display whatever <variablename> is.
 print-%  : ; @echo $* = $($*)
 
 clean:
