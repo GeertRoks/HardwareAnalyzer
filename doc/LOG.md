@@ -4,11 +4,9 @@
 
 ## Current Bugs
 
-- First fire doesn't give a click.
-
 ## Fixed Bugs
 
-## Subjects
+## Overview of subjects
 
 #### Make
 
