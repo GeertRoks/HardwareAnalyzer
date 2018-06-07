@@ -6,7 +6,7 @@
  *  Author      :   Geert Roks
  *  GitHub      :   github.com/GeertRoks/HardwareAnalyzer.git
  *
- *  Function    :   *FOR THE FUTURE* Manages the input and output of
+ *  Function    :   *FOR THE FUTURE, IGNORE IT FOR NOW* Manages the input and output of
  *        audio with JACK.
  *
  **************************************************************************

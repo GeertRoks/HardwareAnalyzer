@@ -24,9 +24,9 @@ SineWave::SineWave() : Oscillator() {
 }//SineWave()
 
 SineWave::~SineWave() {
-
 }//~SineWave()
 
 float SineWave::getSample() {
+// Function: Calculate and return a sample.
   return sin(phase);
 }//getSample()

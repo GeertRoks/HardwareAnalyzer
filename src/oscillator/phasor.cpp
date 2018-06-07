@@ -7,7 +7,7 @@
  *  GitHub      :   github.com/GeertRoks/HardwareAnalyzer.git
  *
  *  Function    :   Logarithmic ramp oscillator derived from oscillator.h.
- *         Used for control values instead of audio values.
+ *         USED FOR CONTROL VALUES. DO NOT USE AS AUDIO OSCILLATOR!
  *
  **************************************************************************
  *
@@ -21,11 +21,15 @@
 #include "phasor.h"
 
 Phasor::Phasor() : Oscillator(0.0625) {
+// Function: Initialize Phasor oscillator with a default sweep time of 15
+//        seconds (1/15 = 0.0625). Use the default offset and growth values.
 }//Phasor()
 
 Phasor::Phasor(float min, float max) : Oscillator(0.0625) {
+// Function: Initialize Phasor oscillator with a default sweep time of 15
+//        seconds (1/15 = 0.0625). Sweep between the min and max value.
   this->offset = min;
-  this->growth = pow(max/this->offset, 1/twoPi);
+  this->growth = pow(max/min, 1/twoPi);
 }//Phasor()
 
 Phasor::~Phasor() {
@@ -33,11 +37,13 @@ Phasor::~Phasor() {
 }//~Phasor()
 
 float Phasor::getSample() {
-  //return (phase/Pi) * 0.5 * this->depth + this->offset;
+// Function: Generate the phasor samples. Based of the logarithmic formula:
+//        F(x) = a * g^x where a is the begin value and g the growth factor.
   return this->offset * pow(this->growth, phase);
 }//getSample()
 
 void Phasor::setMinMax(float min, float max) {
+// Function: Set different minimum and maximum values for the oscillator.
   this->offset = min;
   this->growth = pow(max/this->offset, 1/twoPi);
 }//getMinMax()

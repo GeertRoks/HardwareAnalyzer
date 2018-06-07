@@ -33,9 +33,6 @@ public:
 
 private:
   float *clickSignal;
-  unsigned int testLength = 100; //samples
-  unsigned int clickSample = 3; //nth sample
-
 };//class
 
 #endif//CLICK_H_

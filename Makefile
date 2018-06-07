@@ -46,9 +46,11 @@ OBJ := $(patsubst %.cpp,%.o, $(SRC))
 
 all: Click
 
+# link the program
 Click: $(OBJ)
 	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS)
 
+# builds given .o files from their corresponding .cpp and .h files
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 

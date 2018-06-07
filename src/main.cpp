@@ -42,19 +42,19 @@
 
 int main(int argc, char const *argv[]) {
 
-  unsigned long chunksize=2048;
-  unsigned long samplerate=44100;
+  unsigned long chunksize = 2048;
+  unsigned long sampleRate = 44100;
 
   //Initialize the JackModule
   JackModule jack;
   jack.init(argv[0]); // use program name as JACK client name
   jack.autoConnect();
-
-  samplerate = jack.getSamplerate();
+  sampleRate = jack.getSamplerate();
   std::cerr << "Samplerate: " << samplerate << std::endl;
 
-  //Initialize a sweep oscillator that lasts 15 seconds
-  Sweep sweep(15);
+  //Initialize a sweep oscillator that sweeps from 20 to 20000 Hz in 15 seconds
+  Sweep sweep(20, 20000, 15);
+  sweep.setSampleRate(sampleRate);
 
   //write the samples to JACK
   float *outbuffer = new float[chunksize];
@@ -70,3 +70,9 @@ int main(int argc, char const *argv[]) {
 
   return 0;
 }//main
+
+
+/* TODO:
+  - Make phasor one shot.
+  - Make sinewave without the sin() function (polynomial or wavetable)
+*/

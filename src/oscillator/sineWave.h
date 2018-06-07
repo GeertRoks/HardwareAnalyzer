@@ -24,13 +24,11 @@
 #include "oscillator.h"
 
 class SineWave : public Oscillator {
-
 public:
   SineWave();
   ~SineWave();
 
   float getSample() override;
-
 };//class
 
 #endif//SINEWAVE_H_

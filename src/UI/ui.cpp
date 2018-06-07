@@ -6,7 +6,7 @@
  *  Author      :   Geert Roks
  *  GitHub      :   github.com/GeertRoks/HardwareAnalyzer.git
  *
- *  Function    :   *FOR THE FUTURE* Manages the input from and ouput for
+ *  Function    :   *FOR THE FUTURE, IGNORE IT FOR NOW* Manages the input from and ouput for
  *        the user.
  *
  **************************************************************************

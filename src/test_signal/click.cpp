@@ -22,13 +22,15 @@
 #include "click.h"
 
 Click::Click(unsigned int testLength, unsigned int clickSample) {
-  this->testLength = testLength;
-  this->clickSample = clickSample;
-
+// Function: Initialize and generate signal array.
   clickSignal = new float[testLength];
+
+  // Set all values of the array to 0
   for (size_t i = 0; i < testLength; i++) {
     clickSignal[i] = 0;
-  }
+  }//for
+
+  // Set dirac pulse on the given clickSample.
   clickSignal[clickSample] = 1;
 }//Click()
 
@@ -38,5 +40,6 @@ Click::~Click() {
 }//~Click()
 
 float *Click::getTestsignal() {
+// Function: Return the signalarray
   return clickSignal;
 }//getTestsignal()

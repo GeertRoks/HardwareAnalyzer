@@ -7,7 +7,7 @@
  *  GitHub      :   github.com/GeertRoks/HardwareAnalyzer.git
  *
  *  Function    :   Logarithmic ramp oscillator derived from oscillator.h.
- *         Used for control values instead of audio values.
+ *         USED FOR CONTROL VALUES. DO NOT USE AS AUDIO OSCILLATOR!
  *
  **************************************************************************
  *
@@ -35,15 +35,7 @@ public:
 
 private:
   float offset = 20;
-  float depth = 19080;
-  double growth = 3;
+  double growth = pow(20000/20, 1/twoPi);
 };//class
 
 #endif//PHASOR_H_
-
-//NOTE:
-/*
-TODO:
-  - Make phasor one shot.
-  - input: sweeptime.
-*/

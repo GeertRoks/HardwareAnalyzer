@@ -33,6 +33,7 @@ public:
   virtual float getSample() = 0;
   void tick();
   void setFreq(float freq);
+  void setSampleRate(int sampleRate);
 
 protected:
   double phase = 0;
@@ -44,12 +45,6 @@ protected:
 private:
   float freq;
   int sampleRate = 48000;
-
 };//class
 
 #endif//OSCILLATOR_H_
-
-/*TODO:
-    - Remove samplerate input from setFreq and make a void setSampleRate().
-    - Osccilator based on polynomials.
-*/
