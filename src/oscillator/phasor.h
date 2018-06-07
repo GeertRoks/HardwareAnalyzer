@@ -30,7 +30,6 @@ public:
   ~Phasor();
 
   float getSample() override;
-  void setFreq(float freq);
   void setMinMax(float min, float max);
 
 private:

@@ -23,7 +23,8 @@
 Sweep::Sweep(int min, int max, int sweepTime) {
 // Function: Initialize the sweep with its parameters
 //       (lowest value, highest value, sweeptime)
-  ramp.setFreq(1/sweepTime); //f = 1 / T
+  float rampfreq = 1/(float)sweepTime; //f = 1 / T
+  ramp.setFreq(rampfreq);
   ramp.setMinMax(min, max);
 }//Sweep
 
@@ -43,7 +44,7 @@ void Sweep::tick() {
   sine.tick();
 }//tick()
 
-void setSampleRate(int sampleRate) {
+void Sweep::setSampleRate(int sampleRate) {
   ramp.setSampleRate(sampleRate);
   sine.setSampleRate(sampleRate);
 }//setSampleRate()

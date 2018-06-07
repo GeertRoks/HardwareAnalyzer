@@ -45,5 +45,5 @@ float Phasor::getSample() {
 void Phasor::setMinMax(float min, float max) {
 // Function: Set different minimum and maximum values for the oscillator.
   this->offset = min;
-  this->growth = pow(max/this->offset, 1/twoPi);
+  this->growth = pow(max/min, 1/twoPi);
 }//getMinMax()

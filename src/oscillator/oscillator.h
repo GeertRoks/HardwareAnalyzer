@@ -43,7 +43,7 @@ protected:
   static constexpr double twoPi = 2 * Pi;
 
 private:
-  float freq;
+  float freq = 440;
   int sampleRate = 48000;
 };//class
 

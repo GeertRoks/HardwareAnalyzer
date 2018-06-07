@@ -36,7 +36,7 @@
 
 #include <iostream>
 
-#include "oscillator/sweep.h"
+#include "test_signal/sweep.h"
 #include "../inc/jack_module/jack_module.h"
 
 
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[]) {
   jack.init(argv[0]); // use program name as JACK client name
   jack.autoConnect();
   sampleRate = jack.getSamplerate();
-  std::cerr << "Samplerate: " << samplerate << std::endl;
+  std::cerr << "Samplerate: " << sampleRate << std::endl;
 
   //Initialize a sweep oscillator that sweeps from 20 to 20000 Hz in 15 seconds
   Sweep sweep(20, 20000, 15);
