@@ -50,9 +50,9 @@ all: Click
 Click: $(OBJ)
 	$(CXX) -o $@ $(CXXFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS)
 
-# builds given .o files from their corresponding .cpp and .h files
-%.o: %.cpp %.h
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
+# builds given .o files dependend on their corresponding .cpp and .h files
+%.o: %.cpp
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
 
 
 # Print Makefile variable function (Makefile debugger)

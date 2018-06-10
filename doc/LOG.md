@@ -2,20 +2,82 @@
 
 ##### This is a logbook of the Hardware Analyzer project I'm doing for my Creative Systems Design class at the HKU.
 
+***
+
 ## Current Bugs
+
+***
 
 ## Fixed Bugs
 
+***
+
 ## Overview of subjects
+
+#### Markdown
+See all markdown tricks used in this file at [this GitHub page](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) or check the raw file.
 
 #### Make
 
+###### Implicit variables
+In the file makevariables.txt you can see the text printed on the command line when typed the following command: `make -p` when in a directory without a Makefile. This shows all the predefined variables make knows. Here is a list of variables that I use often.
+
+| Variable |  Explanation                                           |
+| ---------|--------------------------------------------------------|
+| CXX      | Program for compiling C++ programs; default ‘g++’.     |
+| CC       | Program for compiling C programs; default ‘cc’.        |
+| CXXFLAGS | Extra flags to give to the C++ compiler.               |
+| CFLAGS   | Extra flags to give to the C compiler.                 |
+| CPPFLAGS | Extra flags to give to the C preprocessor and programs that use it (the C and Fortran compilers) |
+| LDLIBS   | Library flags or names given to compilers when they are supposed to invoke the linker, ‘ld’. Non-library linker flags, such as -L, should go in the LDFLAGS variable. |
+| LDFLAGS  | Extra flags to give to compilers when they are supposed to invoke the linker, ‘ld’, such as -L. Libraries (-lfoo) should be added to the LDLIBS variable instead. |
+
+Make has many more of these Implicit rules as it can not only call the c compilers. For example: Fortran, Yacc, Lint, Pascal and many others.
+
 ###### Pattern rules
-https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html
+Reference: https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html
+
+Basic rule:
 ~~~
-TODO: write this out.
+target : list of prerequisites (dependencies)
+        recipe
+~~~
+before the recipe you need to put a tab not 8 spaces.
+
+Pattern rule:
+~~~
+%.o : %.cpp
+        $(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
+~~~
+This rule  compiles all .o files (if they are needed) from their corresponding .cpp file. Pattern rules are the updated version of [the old-fashioned suffix rules](https://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html#Suffix-Rules) which looked like this:
+~~~
+.cpp.o :
+        $(CXX) -c $(CXXFLAGS) $(CPPFLAGS) -o $@ $<
 ~~~
 
+###### Automatic variables
+You saw with the Pattern rules you need to use some weird variables like `$@` and `$<`. These are called automatic variables and can only be used in the recipes of pattern rules (and suffix rules). Here is an overview of these variables and what they mean.
+
+| Variable  | Explanation                               |
+|-----------|-------------------------------------------|
+| $@        | The file name of the target of the rule.  |
+| $<        | The name of the first prerequisite.       |
+| $?        | The names of all the prerequisites that are newer than the target, with spaces between them. |
+| $^        | The names of all the prerequisites, with spaces between them. |
+
+This means that on the place of the automatic variable the word described above will be set. For example: the following rule will be called by target main.o
+~~~
+%.o : %.cpp
+        $(CXX) -c $< -o $@
+~~~
+The filled in version will look like this:
+~~~
+main.o : main.cpp
+        g++ -c main.cpp -o main.o
+~~~
+
+###### Make manual
+Make is an amazingly strong program when you get the grasps of it. When you understand the things I explained above you already took a big step in the right direction, but there is still much more to be discovered about Make. So next time you see something you don't understand in a Makefile take the [Make Manual](https://www.gnu.org/software/make/manual/make.html) with you and look it up. Or if you got some more time read the full manual it is worthwhile.
 
 #### Installing programs on Linux
 
@@ -29,6 +91,19 @@ TODO: write this out.
 ./waf
 sudo ./waf install
 ~~~
+
+###### Solve the D-bus error for JACK
+Reference: http://rivendell.tryphon.org/wiki/Debian_6_Installing_JACK2
+
+Check if the real-time priorities are correct:
+~~~
+ulimt -r -l
+~~~
+If you can see "real-time priority (-r) 95" and "max locked memory (kbytes, -l) unlimited" then everything is set correctly. If you see any other values (usually 0 and 64) then you have to:
+~~~
+sudo dpkg-reconfigure -p high jackd2
+~~~
+And reboot after that.
 
 ###### Atom
 I got this from the [Atom Flight-manual](https://flight-manual.atom.io/getting-started/sections/installing-atom/).
@@ -82,8 +157,17 @@ sudo apt-get install spotify-client
 
 #### Raspberry Pi
 
+###### Installing Raspbian
+First of you will need a micro sd and a way of connecting this micro sd to your computer.
+~~~
+Download the newest version of Raspbian from https://www.raspberrypi.org/downloads/raspbian/
+Unzip the file
+Write the image file (.ico) to the micro sd with Win32diskimager or Etcher.
+Raspbian is now installed on the micro sd so you can put it in the Raspberry Pi.
+~~~
+
 ###### Connecting via SSH (Linux)
-I learned that this was a possibility in my Maker skills class from Mark IJzerman. Jochem van Iterson showed me one day when I were trying to figure it out. So I remembered some things about it, but [this video](https://www.youtube.com/watch?v=JJyFLNC2cFM) completely refreshed my memory.
+I learned that this was a possibility in my Maker skills class from Mark IJzerman. Someone showed me one day when I were trying to figure it out. So I remembered some things about it, but [this video](https://www.youtube.com/watch?v=JJyFLNC2cFM) completely refreshed my memory. <br/>
 This method uses a connection between your computer and the Raspberry Pi via an Ethernet cable. When you followed the instructions in the video you can control the Pi from the command line of your (Linux) machine.
 First installation (see [video](https://www.youtube.com/watch?v=JJyFLNC2cFM)):
 ~~~
@@ -97,7 +181,7 @@ Connect to Pi
 cat /var/lib/misc/dnsmasq.leases
 ssh pi@<ip_adres>
 ~~~
-For me its almost everytime: `10.42.0.31`
+For me its almost everytime: `10.42.0.31` <br/>
 Default password of the Pi is: `raspberry`
 
 It's recommended to [change the password](https://www.raspberrypi.org/forums/viewtopic.php?t=193620).
@@ -108,6 +192,28 @@ choose option: Change User Password
 To shutdown the Pi
 ~~~
 sudo shutdown -h now
+~~~
+
+###### Access a USB Stick on Raspberry Pi
+You can't access a USB directly on Raspberry Pi as on other OS. When you connect a USB to the Raspberry Pi you need to do the following:
+~~~
+sudo mkdir /mnt/usb
+sudo mount /dev/sda1 /mnt/usb
+~~~
+After you have done this one time you only have to `mount /dev/sda1 /dev/usb` every time you connect the USB.
+Reach the data on the USB with:
+~~~
+cd /mnt/usb/
+ls
+~~~
+If you like to remove the USB from your Raspberry Pi, you need to do the following:
+~~~
+sudo umount /dev/sda1
+~~~
+
+If this doesn't work your USB isn't probably at sda1 and at another place. To check which USB's are connected type:
+~~~
+sudo fdisk -l
 ~~~
 
 ###### BCM2835 installation
@@ -122,6 +228,30 @@ sudo make check
 sudo make install
 ~~~
 The version can be updated since 1st of May 2018.
+
+###### WiringPi installation (MCP4725)
+I got the info from [this site](https://engineer.john-whittington.co.uk/2015/03/raspberry-pi-dac-mcp4725-with-wiringpi/) which points to [this GitHub repository](https://github.com/tuna-f1sh/wiringPi-mcp4725). This repo let's wiringPi work with the MCP4725 board. <br/>
+For Wiring pi you need to download it from git.drogon.net.
+~~~
+cd
+git clone git://git.drogon.net/wiringPi
+cd ~/WiringPi
+./build
+~~~
+For more tips and special cases see [the site](http://wiringpi.com/download-and-install/)
+
+###### Jack on Raspberry Pi
+~~~
+Yet to be researched. Expected Summer 2018.
+~~~
+
+###### Jack vs BCM2835 vs MCP4725
+Jack an easy to use program, but it doesn't have much support on Windows. The interface of Jack is very easy, especially with the repository of Marc Groenewegen ([jack_module](https://github.com/marcdinkum/jack_module.git)). I haven't figured it out how to use Jack on Raspberry Pi, but I will figure it out soon. <br/>
+I tried the BCM2835 library, because I wanted to make my own AD-DA converter shield. It is easy to install, but the interface isn't very easy. You need some good knowledge about bit math, arrays and SPI. This made it very hard for me to program the things I want. I also created the AD DA converter from Electrosmash, but when I measured the frequency response through the system. I saw I fell off at 5 KHz. This was inevitable with this circuit. So this may be a good system with a Library for the interface and a good AD DA converter.
+After having tried the BCM2835, I tried the MCP4725 DAC. But it was very hard to make this board work. I found a video that explained what to do without WiringPi, but that gave a very weird error and installing WiringPi was a nightmare. It doesn't have great troubleshooting documentation and installing the way they wanted me to, didn't really work. <br/>
+So my conclusion is use JACK with a USB interface, or find a good interface library for the BCM2835 library and a good AD DA circuit.
+
+***
 
 ## Dates
 March 29:
@@ -142,7 +272,7 @@ April 16th:
   - Figured some things out about the implicit and pattern rules of Makefiles and the use for them.
 
 April 17th - 20th:
-  - Still struggling with the makefile and the project structure I have. I'm turning the Internet upside down in the hopes to find a good example or useful tips. It's hard to think of a way to put the object files in a different repository then the source files and keep the dependencies correct.
+  - Still struggling with the Makefile and the project structure I have. I'm turning the Internet upside down in the hopes to find a good example or useful tips. It's hard to think of a way to put the object files in a different directory than the source files whilst keeping the dependencies correct.
 
 April 21st:
   - Because I struggled with the makefile all week, I decided to leave all the object files in the `src/` folder. This way it's still able to compile and keep its dependencies right. I will look later if I'm able to implement the `obj/` folder with correct dependencies, because it should be possible.
@@ -168,7 +298,7 @@ May 1st:
   - I tried installing the BCM2835 library on my Linux machine for development, but I get a weird error. So I will see what will be the easiest way to develop. Either writing in Atom on the Linux machine and committing to git and pulling onto the Raspberry Pi, or writing in either Nano or Vim on the Raspberry Pi itself. When using the second option I will have to start using branches to keep updating the LOG and working on the project.
 
 May 2nd:
-  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. `TODO: add info about how to install Raspbian.`
+  - I tried installing vim on my Pi, so I thought I should first update everything (which I now know is wrong). So I did `sudo apt-get update` and then `sudo apt-get upgrade`. It updated about 300 apps and after it was done. 3 couldn't be installed because there was no more room on my sd. Therefore there was no more room for even doing `cd`. Because that makes a temporary file of a few bytes. So I came to the conclusion I needed to install a fresh version of Raspbian. See [here](#Installing Raspbian) how to install Raspbian.
 
 May 4th:
   - Raspbian Lite didn't work very well. It hasn't standard autologin and SSH isn't enabled automaticly. It seemed a lot of work to find out so I just installed the desktop version, which is just a few minutes of work.
@@ -189,7 +319,8 @@ May 17th:
 
 May 18th:
   - Build the ADC for the Raspberry Pi.
-  - I noticed that the sound through the Pi is very muffled. So I started I started calculating the RC filters at the output stage.`TODO: Add info about how I measured the output` I changed the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well.
+  - I noticed that the sound through the Pi is very muffled. So I started measuring the systems frequency response. I put white noise on the input and with the clean.c file from Electrosmash it should send it right through the output without transformation. This way I can measure how the AD and DA converter change the sound when I connect the output back to my computer and record it with my DAW. There I saw that the frequency response dropped off rapidly above 1 KHz. I calculated the RC filter at the output stage and that is a 2 KHz lowpass filter.
+  So I changed some of the capacitors and that had some improvement, but the sound still  dropped off at 5 KHz. So I think I'll have to change the input capacitors as well. See the pictures starting with `Test_DIY_AD-DAC_` for the setup and measuring in `doc/Research`.
 
 May 22nd:
   - Tried changing the input capacitors, but it also hadn't much of an effect. It keeps dropping off at 5 KHz. I looked at the [site of Electrosmash](https://www.electrosmash.com/forum/pedal-pi/206-pedal-pi-circuit-analysis) and found that they did that intensionaly, because of harmonics casued by the pwm signal.
@@ -224,7 +355,7 @@ May 28th:
 
 May 29th:
   - With the feedback from yesterday and tip from Pieter Suurmond in mind, I set a goal for today: get the sweep working with JACK on my Linux computer.
-  - My first problem was to get Jack working on my Linux computer. I installed it, but always gave me a D-Bus error and that was the moment when I started to develop on the BCM2835 library. I solved this with help of [this site](http://rivendell.tryphon.org/wiki/Debian_6_Installing_JACK2) (See <tag to overview>). `TODO add to overview` JACK and QJackctl worked correctly after that.
+  - My first problem was to get Jack working on my Linux computer. I installed it, but always gave me a D-Bus error and that was the moment when I started to develop on the BCM2835 library. I solved this with help of [this site](http://rivendell.tryphon.org/wiki/Debian_6_Installing_JACK2) (See [the overview at the top](#Solve the D-bus error for JACK)). JACK and QJackctl worked correctly after that.
   - Then I added jack_module as a submodule again. This gave me some problems, because I didn't fully remove these from the last time. This gave me some path problems that I didn't know to fix. Because I had no local changes, I decided to remove my local project folder and `git clone` it back. That way all modules were gone, because I had removed them on my other computer, but locally it was still stored on my Linux computer. After that I just `git submodule add` the jack_module library from [Marc's github](https://github.com/marcdinkum/) and everything was allright.
   - I didn't want to edit Marc's project folder, because if Marc was to update his library, I would have to re-edit that. Before I called his Makefile recursivly from my Makefile, but that way it compiles also all his examples that I don't want. So I created a module.mk file in the `inc/` folder and added only the jack_module.cpp/.h and ringbuffer.cpp/.h to my Makefile. This works very well.
   - I edited my main.cpp so Jack worked in it. Only leaving the threads out for now. I later want it all in my IO file. I forgot to add the jack.init() and jack.autoConnect() and wondered why I couldn't hear anything and couldn't see my program in the connect list of QJackctl. So be sure to include everything.
@@ -247,7 +378,17 @@ May 31st:
   - Tried creating a function that would make the sweep logarithmically.
   - I started with the idea that the input would be between 0 and 2Pi and the output would be between 20 Hz and 20 KHz. I started with the basic logarithmic formula: `F(x) = a * g^x`. Where a is the output at zero and g is the growth factor.
   - When I solved it for the values I wanted and tested it in sweep.h, I thought about making it variable. This was very easy, because a is just the lowest value to be tested. For g you need to solve for `g = log(maxvalue/a) / log(2Pi)`. This is extracted out of the basic formula with F(x) = maxvalue and x = 2Pi.
+  - I also checked if the sweep is really logarithmic now. I recorded the sweep into my DAW and with its waterfall spectrum analyzer I saw that it really is logarithmic now. The frequency on the bottom is logarithmic, so if the line is straight then the sweep is also logarithmic. See the pictures `doc/Research/Lin Sweep.png` and `doc/Research/Log Sweep.png`.
 
 June 3rd:
   - Checked if the logarithmic sweep is really logarithmic and looked how the linear sweep looks like. They resemble my expectations.
   - From this point I will make a report on my research on the different subjects I came across for my final grade. After that I will finish this project, since it will still be a useful device to have.
+
+June 4th:
+  - In class we had to give a mockup presentation. This to practice for next week. Here I my teacher Ciska came with a great idea. She said I should set this up as a product, since it doesn't exist on the market yet. Make a mockup and present it next week as a product presentation. I thought this was a great idea, but I didn't want this to be a commercial product, since I got really helped by the open source community, like Electrosmash. So I will work this product further trough until I have a working prototype. Then I will create a product video and look for contributors to help me get it to the masses. I think this will be a great tool for the beginning DSP programmer.
+
+June 7th - 10th:
+  - Clean, comment and document code. Prepare for presentation.
+
+June 11th:
+  - Final presentation.
