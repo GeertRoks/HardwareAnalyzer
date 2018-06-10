@@ -1,4 +1,6 @@
 PWD = src/test_signal
 
 SRC += $(PWD)/click.cpp
-INCS += $(PWD)/click.h
+SRC += $(PWD)/sweep.cpp
+HDRS += $(PWD)/click.h
+HDRS += $(PWD)/sweep.h

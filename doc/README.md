@@ -1,9 +1,9 @@
-# Hardware Analyzer based on Raspberry Pi
+# Hardware Analyzer
 
 Geert Roks, 2018
 
 ### Concept
-A program that plays a test signal into a hardware device. The output from the device under test is recorded by the program. The program analyses the outputted signal and plots the results in GNUplot. It also exports the impulse response and convolves it with the further input. This way the hardware device that has been tested is now copied.
+A program that plays a test signal into a hardware device. The output from the device under test is recorded by the program. The program analyses the outputted signal and plots the results in GNUplot. It also exports the impulse response and convolves it with the further input. This way the hardware device that has been tested is now copied. This program will run on a Raspberry Pi.
 
 ### Why do this?
 I want a device to test my products so I know it really does what I told it to do. Further it is very useful to be able to analyze sound. This can be used in more complex audio equipment like pitch correction, harmonizers and spectrum editors. The convolution part is also a learning moment out of pure curiosity. So it's both useful and educational.
@@ -23,12 +23,13 @@ I want a device to test my products so I know it really does what I told it to d
     - [x] Recursive Makefiles
   - [x] Test Signal
     - [x] Generate click (obsolete)
-    - [x] Output click with Jack (obsolete)
-    - [x] Output signal with GPIO pins (edit: May 7th)
-    - [ ] Generate Sweep
+    - [x] Output click with Jack
+    - [x] Output signal with GPIO pins (edit: May 7th) (obsolete)
+    - [x] Generate logarithmic Sweep
+
   - [ ] Analysis System
-    - [x] Jack input (obsolete)
-    - [ ] Receive input with GPIO pins (edit: May 7th)
+    - [x] Jack input
+    - [ ] Receive input with GPIO pins (edit: May 7th) (obsolete)
     - [ ] FFt implementation
     - [ ] Put data in a file readable for GNUplot
   - [ ] GNUplot
